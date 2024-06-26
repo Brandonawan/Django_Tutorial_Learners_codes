@@ -72,4 +72,38 @@ def dashboard(request):
     print("User request:",request.user)
     return render(request, 'dashboard.html')
 
+from .send_mail import send_email
+from django.http import HttpResponse
+
+def email_sender(request):
+    if request.method == 'POST':
+        firstname = request.POST.get('firstname')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        email = request.POST.get('email')
+        print(f"Hi {firstname}, with subject: {subject} has the message {message}")
+        try:
+            subject = subject
+            body = message
+            to_email = email
+            from_email = 'abibangbrandon855@outlook.com'
+            password = ''
+            send_email(subject, body, to_email, from_email, password)
+            return HttpResponse(f"Email sent successfully to {email} check your inbox")
+        except Exception as e:
+            return HttpResponse(f"Failed to send email: {e}")
+    return render(request, 'contact.html')
+
+    # try:
+    #     subject = " Email"
+    #     body = "This is a test email sent from Python."
+    #     to_email = 'ukponoadem@gmail.com'
+    #     from_email = 'abibangbrandon855@outlook.com'
+    #     password = 'Devops23#A_'
+    #     send_email(subject, body, to_email, from_email, password)
+    #     return HttpResponse("Email sent successfully")
+    # except Exception as e:
+    #     return HttpResponse(f"Failed to send email: {e}")
+
+
 
