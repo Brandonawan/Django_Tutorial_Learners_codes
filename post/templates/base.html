@@ -2,11 +2,13 @@
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-
+<img src="{% static 'images/A.jpg' %}" alt="image">
 {% block content %}
 {% endblock %}
-
+<script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>
